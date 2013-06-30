@@ -1,0 +1,31 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:account.bank.statement,import_file:"
+msgid "Import File"
+msgstr "Archivo de importación"
+
+msgctxt "field:account.bank.statement.import_csb43.start,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:account.bank.statement.import_csb43.start,import_file:"
+msgid "Import File"
+msgstr "Archivo de importación"
+
+msgctxt "model:account.bank.statement.import_csb43.start,name:"
+msgid "Import CSB43 start"
+msgstr "Importación CSB43 Inicio"
+
+msgctxt "model:ir.action,name:act_import_csb43"
+msgid "Import CSB43"
+msgstr "Importación CSB43"
+
+msgctxt "wizard_button:account.bank.statement.import_csb43,start,end:"
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgctxt "wizard_button:account.bank.statement.import_csb43,start,import_file:"
+msgid "Import File"
+msgstr "Archivo de importación"
