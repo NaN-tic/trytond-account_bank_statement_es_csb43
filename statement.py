@@ -4,7 +4,7 @@ from trytond.pool import Pool
 from trytond.model import ModelSQL, ModelView, fields
 from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateView, StateTransition, Button
-#from retrofix import c43
+from retrofix import c43
 import datetime
 
 __all__ = ['Statement', 'ImportCSB43', 'ImportCSB43Start']
@@ -45,13 +45,15 @@ class ImportCSB43(Wizard):
                 description.append(record.get('concept_2', '').strip())
             elif record.get('record_code') == '22':
                 if line:
+                    description.append(record.get('reference_1','').strip())
+                    description.append(record.get('reference_2','').strip())
                     description = [x for x in description if x != '']
                     line['description'] = "/".join(description)
                     description = []
                     lines.append(line.copy())
                     line = {}
                 line = {
-                    'statement': statement,
+                    'statement': statement.id,
                     'date': record.get('value_date'),
                     'amount': record.get('amount'),
                     }
