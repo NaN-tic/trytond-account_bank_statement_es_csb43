@@ -6,7 +6,7 @@ import os
 import ConfigParser
 
 MODULE = 'account_bank_statement_es_csb43'
-PREFIX = 'nantic'
+PREFIX = 'trytonspain'
 MODULE2PREFIX = {}
 
 
@@ -38,12 +38,12 @@ tests_require = ['proteus >= %s.%s, < %s.%s' %
 
 setup(name='%s_%s' % (PREFIX, MODULE),
     version=info.get('version', '0.0.1'),
-    description='',
+    description='Tryton Account Bank Statemenet Spanish CSB43',
     long_description=read('README'),
     author='NaN·tic',
     url='http://www.nan-tic.com/',
     download_url=
-      "https://bitbucket.org/nantic/account_bank_statement_es_csb43",
+      "https://bitbucket.org/trytonspain/account_bank_statement_es_csb43",
     package_dir={'trytond.modules.%s' % MODULE: '.'},
     packages=[
         'trytond.modules.%s' % MODULE,
@@ -51,7 +51,7 @@ setup(name='%s_%s' % (PREFIX, MODULE),
         ],
     package_data={
         'trytond.modules.%s' % MODULE: (info.get('xml', [])
-            + ['tryton.cfg', 'locale/*.po', 'tests/*.rst']),
+            + ['tryton.cfg', 'view/*.xml', 'locale/*.po', 'tests/*.rst']),
         },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
