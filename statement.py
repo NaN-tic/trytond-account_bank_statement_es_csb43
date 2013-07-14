@@ -59,6 +59,10 @@ class ImportCSB43(Wizard):
                     }
                 description.append(record.get('concept_1', '').strip())
                 description.append(record.get('concept_2', '').strip())
+        if line:
+            description = [x for x in description if x != '']
+            line['description'] = "/".join(description)
+            lines.append(line.copy())
         BankStatementLine.create(lines)
         BankStatement.confirm([statement])
         attach = Attachment(
