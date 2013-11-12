@@ -2,17 +2,13 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "field:account.bank.statement,import_file:"
-msgid "Import File"
-msgstr "Arxiu d'importació"
-
 msgctxt "field:account.bank.statement.import_csb43.start,id:"
 msgid "ID"
 msgstr "Identificador"
 
 msgctxt "field:account.bank.statement.import_csb43.start,import_file:"
 msgid "Import File"
-msgstr "Arxiu d'importació"
+msgstr "Importa fitxer"
 
 msgctxt "model:account.bank.statement.import_csb43.start,name:"
 msgid "Import CSB43 start"
@@ -22,9 +18,13 @@ msgctxt "model:ir.action,name:act_import_csb43"
 msgid "Import CSB43"
 msgstr "Importació CSB43"
 
+msgctxt "view:account.bank.statement.import_csb43.start:"
+msgid "Import CSB43 File to Bank Statement"
+msgstr "Importa fitxer CSB43 als extractes bancaris"
+
 msgctxt "wizard_button:account.bank.statement.import_csb43,start,end:"
 msgid "Cancel"
-msgstr "Cancela"
+msgstr "Cancel·la"
 
 msgctxt "wizard_button:account.bank.statement.import_csb43,start,import_file:"
 msgid "Import File"
