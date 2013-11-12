@@ -8,7 +8,7 @@ msgstr "Identificador"
 
 msgctxt "field:account.bank.statement.import_csb43.start,import_file:"
 msgid "Import File"
-msgstr "Importa fitxer"
+msgstr "Fitxer d'importació"
 
 msgctxt "model:account.bank.statement.import_csb43.start,name:"
 msgid "Import CSB43 start"
@@ -28,4 +28,4 @@ msgstr "Cancel·la"
 
 msgctxt "wizard_button:account.bank.statement.import_csb43,start,import_file:"
 msgid "Import File"
-msgstr "Arxiu d'importació"
+msgstr "Importa fitxer"
