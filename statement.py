@@ -39,29 +39,28 @@ class ImportCSB43(Wizard):
         description = []
         lines = []
         line = {}
+
         for record in records[1:-1]:
-            if record.get('record_code') == '23':
-                description.append(record.get('concept_1', '').strip())
-                description.append(record.get('concept_2', '').strip())
-            elif record.get('record_code') == '22':
+            if record.record_code == '23':
+                description.append(record.concept_1)
+                description.append(record.concept_2)
+            elif record.record_code == '22':
                 if line:
-                    description.append(record.get('reference_1','').strip())
-                    description.append(record.get('reference_2','').strip())
-                    description = [x for x in description if x != '']
-                    line['description'] = "/".join(description)
+                    description.append(record.reference_1)
+                    description.append(record.reference_2)
+                    description = [x.strip() for x in description if x != '']
+                    line['description'] = " ".join(description)
                     description = []
                     lines.append(line.copy())
                     line = {}
                 line = {
                     'statement': statement.id,
-                    'date': record.get('value_date'),
-                    'amount': record.get('amount'),
+                    'date': record.value_date,
+                    'amount': record.amount,
                     }
-                description.append(record.get('concept_1', '').strip())
-                description.append(record.get('concept_2', '').strip())
         if line:
-            description = [x for x in description if x != '']
-            line['description'] = "/".join(description)
+            description = [x.strip() for x in description if x != '']
+            line['description'] = " ".join(description)
             lines.append(line.copy())
         BankStatementLine.create(lines)
         BankStatement.confirm([statement])
