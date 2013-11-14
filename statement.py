@@ -40,6 +40,13 @@ class ImportCSB43(Wizard):
         lines = []
         line = {}
 
+        BankStatement.write([statement], {
+            'start_date': records[0].start_date,
+            'end_date': records[0].end_date,
+            'start_balance': records[0].initial_balance,
+            'end_balance': records[-1].final_balance,
+            })
+
         for record in records[1:-1]:
             if record.record_code == '23':
                 description.append(record.concept_1)
