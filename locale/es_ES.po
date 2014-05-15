@@ -2,6 +2,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
+msgctxt "error:account.bank.statement.import_csb43:"
+msgid ""
+"You cannot import a CSB43 bank statement file in a bank statement with "
+"lines."
+msgstr ""
+"No puede importar un archivo CSB43 de extracto bancario a un extracto "
+"bancario con líneas."
+
 msgctxt "field:account.bank.statement.import_csb43.start,id:"
 msgid "ID"
 msgstr "ID"

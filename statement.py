@@ -28,12 +28,23 @@ class ImportCSB43(Wizard):
             ])
     import_file = StateTransition()
 
+    @classmethod
+    def __setup__(cls):
+        super(ImportCSB43, cls).__setup__()
+        cls._error_messages.update({
+                'statement_already_has_lines':
+                    'You cannot import a CSB43 bank statement file in a bank '
+                        'statement with lines.',
+                })
+
     def transition_import_file(self):
         BankStatement = Pool().get('account.bank.statement')
         BankStatementLine = Pool().get('account.bank.statement.line')
         Attachment = Pool().get('ir.attachment')
 
         statement = BankStatement(Transaction().context['active_id'])
+        if statement.lines:
+            self.raise_user_error('statement_already_has_lines')
         data = unicode(str(self.start.import_file), 'latin1')
         records = c43.read(data)
         description = []
@@ -72,7 +83,7 @@ class ImportCSB43(Wizard):
         BankStatementLine.create(lines)
         BankStatement.confirm([statement])
         attach = Attachment(
-            name=datetime.datetime.now().strftime("%y/%m/%d hh:mm:ss"),
+            name=datetime.datetime.now().strftime("%y/%m/%d %H:%M:%S"),
             type='data',
             data=self.start.import_file,
             resource=str(statement))
