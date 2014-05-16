@@ -64,18 +64,17 @@ class ImportCSB43(Wizard):
                 description.append(record.concept_2)
             elif record.record_code == '22':
                 if line:
-                    description.append(record.reference_1)
-                    description.append(record.reference_2)
                     description = [x.strip() for x in description if x != '']
                     line['description'] = " ".join(description)
-                    description = []
                     lines.append(line.copy())
-                    line = {}
                 line = {
                     'statement': statement.id,
                     'date': record.value_date,
                     'amount': record.amount,
                     }
+                description = [record.reference_1]
+                description.append(record.reference_2)
+
         if line:
             description = [x.strip() for x in description if x != '']
             line['description'] = " ".join(description)
