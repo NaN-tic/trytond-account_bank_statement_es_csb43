@@ -3,5 +3,5 @@
 copyright notices and license terms. -->
 <form string="Import CSB43 File to Bank Statement">
     <label name="import_file"/>
-    <field name="import_file"/> 
+    <field name="import_file"/>
 </form>

@@ -13,14 +13,12 @@ __all__ = ['Statement', 'ImportCSB43', 'ImportCSB43Start']
 class ImportCSB43Start(ModelView):
     'Import CSB43 start'
     __name__ = 'account.bank.statement.import_csb43.start'
-
     import_file = fields.Binary('Import File', required=True)
 
 
 class ImportCSB43(Wizard):
     'Import CSB43 file'
     __name__ = 'account.bank.statement.import_csb43'
-
     start = StateView('account.bank.statement.import_csb43.start',
         'account_bank_statement_es_csb43.import_csb43_start_view_form', [
             Button('Cancel', 'end', 'tryton-cancel'),
