@@ -7,7 +7,7 @@ from trytond.wizard import Wizard, StateView, StateTransition, Button
 from retrofix import c43
 import datetime
 
-__all__ = ['Statement', 'ImportCSB43', 'ImportCSB43Start']
+__all__ = ['ImportCSB43', 'ImportCSB43Start']
 
 
 class ImportCSB43Start(ModelView):
@@ -87,12 +87,3 @@ class ImportCSB43(Wizard):
         attach.save()
         statement.search_reconcile()
         return 'end'
-
-
-class Statement(ModelSQL, ModelView):
-    __name__ = 'account.bank.statement'
-
-    def search_reconcile(self):
-        for line in self.lines:
-            StatementLine = Pool().get('account.bank.statement.line')
-            StatementLine.search_reconcile([line])

@@ -3,10 +3,8 @@
 from trytond.pool import Pool
 from .statement import *
 
-
 def register():
     Pool.register(
-        Statement,
         ImportCSB43Start,
         module='account_bank_statement_es_csb43', type_='model')
     Pool.register(
