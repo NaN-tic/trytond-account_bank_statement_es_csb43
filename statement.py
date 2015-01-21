@@ -14,6 +14,18 @@ class ImportCSB43Start(ModelView):
     'Import CSB43 start'
     __name__ = 'account.bank.statement.import_csb43.start'
     import_file = fields.Binary('Import File', required=True)
+    attachment = fields.Boolean('Attachment',
+        help='Attach CSV file after import.')
+    confirm = fields.Boolean('Confirm',
+        help='Confirm Bank Statement after import.')
+
+    @classmethod
+    def default_attachment(cls):
+        return True
+
+    @classmethod
+    def default_confirm(cls):
+        return True
 
 
 class ImportCSB43(Wizard):
@@ -36,15 +48,20 @@ class ImportCSB43(Wizard):
                 })
 
     def transition_import_file(self):
-        BankStatement = Pool().get('account.bank.statement')
-        BankStatementLine = Pool().get('account.bank.statement.line')
-        Attachment = Pool().get('ir.attachment')
+        pool = Pool()
+        BankStatement = pool.get('account.bank.statement')
+        BankStatementLine = pool.get('account.bank.statement.line')
+        Attachment = pool.get('ir.attachment')
 
         statement = BankStatement(Transaction().context['active_id'])
         if statement.lines:
             self.raise_user_error('statement_already_has_lines')
         data = unicode(str(self.start.import_file), 'latin1')
         records = c43.read(data)
+
+        has_attachment = self.start.attachment
+        has_confirm = self.start.confirm
+
         description = []
         lines = []
         line = {}
@@ -78,12 +95,17 @@ class ImportCSB43(Wizard):
             line['description'] = " ".join(description)
             lines.append(line.copy())
         BankStatementLine.create(lines)
-        BankStatement.confirm([statement])
-        attach = Attachment(
-            name=datetime.datetime.now().strftime("%y/%m/%d %H:%M:%S"),
-            type='data',
-            data=self.start.import_file,
-            resource=str(statement))
-        attach.save()
-        statement.search_reconcile()
+
+        if has_confirm:
+            BankStatement.confirm([statement])
+            statement.search_reconcile()
+
+        if has_attachment:
+            attach = Attachment(
+                name=datetime.datetime.now().strftime("%y/%m/%d %H:%M:%S"),
+                type='data',
+                data=self.start.import_file,
+                resource=str(statement))
+            attach.save()
+
         return 'end'
