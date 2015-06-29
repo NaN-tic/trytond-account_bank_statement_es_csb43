@@ -29,7 +29,7 @@ cuenta corriente, por lo que sea cual sea nuestra entidad bancaria, siempre que
 opere dentro del ámbito estatal, nos podrá enviar el extracto en formato CSB43.
 
 .. note:: Para la obtención del fichero CSB43 la mayoría de los bancos permiten
-   la descarga este fichero desde la plataforma online del banco.
+   la descarga de este fichero desde la plataforma online del banco.
 
 Una vez ya tengamos nuestro extracto bancario en formato CSB43 guardado en
 nuestro ordenador, ya podremos proceder a la importación. Para ello, desde el
@@ -37,6 +37,8 @@ menú |menu_statements| debemos crear un nuevo extracto, clicar en el icono
 *Ejecutar acción* y seleccionar seguidamente la opción Importación CSB 43.
 
 .. figure:: images/tryton-action.png
+
+   Captura de pantalla de la acción importación
 
 Al clicar aquí se nos abrirá una ventana donde deberemos clicar en el icono
 *Explorar* y seleccionar el fichero CSB43 que hemos guardado en nuestro
