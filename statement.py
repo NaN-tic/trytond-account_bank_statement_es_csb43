@@ -1,13 +1,36 @@
 #The COPYRIGHT file at the top level of this repository contains the full
 #copyright notices and license terms.
-from trytond.pool import Pool
+from trytond.pool import Pool, PoolMeta
 from trytond.model import ModelView, fields
 from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateView, StateTransition, Button
+from trytond.pyson import Eval
 from retrofix import c43
 import datetime
 
-__all__ = ['ImportCSB43', 'ImportCSB43Start']
+__all__ = ['Statement', 'ImportCSB43', 'ImportCSB43Start']
+
+
+class Statement:
+    'Bank Statement'
+    __name__ = 'account.bank.statement'
+    __metaclass__ = PoolMeta
+
+    @classmethod
+    def __setup__(cls):
+        super(Statement, cls).__setup__()
+        cls._buttons.update({
+                'import_csb43': {
+                    'invisible': Eval('lines'),
+                    'icon': 'tryton-executable',
+                    },
+                })
+
+    @classmethod
+    @ModelView.button_action(
+        'account_bank_statement_es_csb43.act_import_csb43')
+    def import_csb43(cls, statements):
+        pass
 
 
 class ImportCSB43Start(ModelView):
