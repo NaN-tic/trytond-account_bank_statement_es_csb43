@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!--The COPYRIGHT file at the top level of this repository
+contains the full copyright notices and license terms. -->
+<data>
+    <xpath expr="/form/group[@id='status']" position="inside">
+        <button name="import_csb43" string="Import CSB43"/>
+    </xpath>
+</data>

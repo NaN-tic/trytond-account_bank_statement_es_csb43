@@ -46,6 +46,10 @@ msgctxt "view:account.bank.statement.import_csb43.start:"
 msgid "Import CSB43 File to Bank Statement"
 msgstr "Importa fitxer CSB43 als extractes bancaris"
 
+msgctxt "view:account.bank.statement:"
+msgid "Import CSB43"
+msgstr "Importació CSB43"
+
 msgctxt "wizard_button:account.bank.statement.import_csb43,start,end:"
 msgid "Cancel"
 msgstr "Cancel·la"
