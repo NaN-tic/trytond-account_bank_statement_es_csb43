@@ -105,11 +105,7 @@ class ImportCSB43(Wizard):
                     description = [x.strip() for x in description if x != '']
                     line['description'] = " ".join(description)
                     lines.append(line.copy())
-                line = {
-                    'statement': statement.id,
-                    'date': record.value_date,
-                    'amount': record.amount,
-                    }
+                line = self.get_line_vals_from_record(record, statement)
                 description = [record.reference_1]
                 description.append(record.reference_2)
 
@@ -132,3 +128,10 @@ class ImportCSB43(Wizard):
             attach.save()
 
         return 'end'
+
+    def get_line_vals_from_record(self, record, statement):
+        return {
+            'statement': statement.id,
+            'date': record.value_date,
+            'amount': record.amount,
+            }
