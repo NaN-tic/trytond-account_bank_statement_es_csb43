@@ -1,6 +1,16 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:account.bank.statement.import_csb43:"
+msgid ""
+"The supplied file does not have the expected format.\n"
+"This is the technical error returned by parser:\n"
+"  %s"
+msgstr ""
+"El fitxer subministrat no té el format esperat.\n"
+"Aquest és l'error tècnic que ha retornat l'analitzador:\n"
+"  %s"
 
 msgctxt "error:account.bank.statement.import_csb43:"
 msgid ""

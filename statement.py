@@ -6,6 +6,7 @@ from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateView, StateTransition, Button
 from trytond.pyson import Eval
 from retrofix import c43
+from retrofix.exception import RetrofixException
 import datetime
 
 __all__ = ['Statement', 'ImportCSB43', 'ImportCSB43Start']
@@ -65,9 +66,12 @@ class ImportCSB43(Wizard):
     def __setup__(cls):
         super(ImportCSB43, cls).__setup__()
         cls._error_messages.update({
-                'statement_already_has_lines':
+                'statement_already_has_lines': (
                     'You cannot import a CSB43 bank statement file in a bank '
-                        'statement with lines.',
+                    'statement with lines.'),
+                'format_error': (
+                    "The supplied file does not have the expected format.\n"
+                    "This is the technical error returned by parser:\n  %s"),
                 })
 
     def transition_import_file(self):
@@ -80,7 +84,10 @@ class ImportCSB43(Wizard):
         if statement.lines:
             self.raise_user_error('statement_already_has_lines')
         data = unicode(str(self.start.import_file), 'latin1')
-        records = c43.read(data)
+        try:
+            records = c43.read(data)
+        except RetrofixException as e:
+            self.raise_user_error('format_error', str(e))
 
         has_attachment = self.start.attachment
         has_confirm = self.start.confirm
