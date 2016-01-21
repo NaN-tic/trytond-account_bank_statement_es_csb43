@@ -1,3 +1,4 @@
+* Detect errors parsing c43 file and raise user error
 * Modularized file importation to customize created line values
 
 Version 3.4.0 - 2014-11-03
