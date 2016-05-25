@@ -45,7 +45,9 @@ minor_version = int(minor_version)
 name = 'trytonspain_account_bank_statement_es_csb43'
 download_url = 'https://bitbucket.org/trytonspain/trytond-account_bank_statement_es_csb43'
 
-requires = []
+requires = [
+    'retrofix >= 0.18',
+    ]
 for dep in info.get('depends', []):
     if not re.match(r'(ir|res)(\W|$)', dep):
         prefix = MODULE2PREFIX.get(dep, 'trytond')
