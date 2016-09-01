@@ -43,7 +43,8 @@ major_version, minor_version, _ = version.split('.', 2)
 major_version = int(major_version)
 minor_version = int(minor_version)
 name = 'trytonspain_account_bank_statement_es_csb43'
-download_url = 'https://bitbucket.org/trytonspain/trytond-account_bank_statement_es_csb43'
+download_url = ('https://bitbucket.org/trytonspain/'
+    'trytond-account_bank_statement_es_csb43')
 
 requires = [
     'retrofix >= 0.18',
