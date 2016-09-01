@@ -4,7 +4,7 @@ from trytond.pool import Pool, PoolMeta
 from trytond.model import ModelView, fields
 from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateView, StateTransition, Button
-from trytond.pyson import Eval
+from trytond.pyson import Eval, Bool
 from retrofix import c43
 from retrofix.exception import RetrofixException
 import datetime
@@ -21,7 +21,7 @@ class Statement:
         super(Statement, cls).__setup__()
         cls._buttons.update({
                 'import_csb43': {
-                    'invisible': Eval('lines'),
+                    'invisible': Bool(Eval('lines', [])),
                     'icon': 'tryton-executable',
                     },
                 })
