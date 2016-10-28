@@ -48,7 +48,7 @@ msgctxt "model:account.bank.statement.import_csb43.start,name:"
 msgid "Import CSB43 start"
 msgstr "Importación CSB43 Inicio"
 
-msgctxt "model:ir.action,name:act_import_csb43"
+msgctxt "model:ir.action,name:wizard_import_csb43"
 msgid "Import CSB43"
 msgstr "Importación CSB43"
 

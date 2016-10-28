@@ -27,10 +27,15 @@
             <field name="name">import_csb43_start_view_form</field>
         </record>
 
-        <record model="ir.action.wizard" id="act_import_csb43">
+        <record model="ir.action.wizard" id="wizard_import_csb43">
             <field name="name">Import CSB43</field>
             <field name="wiz_name">account.bank.statement.import_csb43</field>
             <field name="model">account.bank.statement</field>
+        </record>
+        <record model="ir.action.keyword" id="import_csb43_keyword">
+            <field name="keyword">form_action</field>
+            <field name="model">account.bank.statement,-1</field>
+            <field name="action" ref="wizard_import_csb43"/>
         </record>
     </data>
 </tryton>
