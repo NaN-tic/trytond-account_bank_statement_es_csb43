@@ -30,7 +30,7 @@ msgstr "Confirmar"
 
 msgctxt "field:account.bank.statement.import_csb43.start,id:"
 msgid "ID"
-msgstr "ID"
+msgstr "Identificador"
 
 msgctxt "field:account.bank.statement.import_csb43.start,import_file:"
 msgid "Import File"
