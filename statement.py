@@ -12,7 +12,6 @@ __all__ = ['Statement', 'ImportCSB43', 'ImportCSB43Start']
 
 
 class Statement:
-    'Bank Statement'
     __name__ = 'account.bank.statement'
     __metaclass__ = PoolMeta
 
