@@ -125,7 +125,7 @@ class ImportCSB43(Wizard):
 
         if has_confirm:
             BankStatement.confirm([statement])
-            statement.search_reconcile()
+            BankStatement.search_reconcile([statement])
 
         if has_attachment:
             attach = Attachment(
