@@ -85,8 +85,6 @@ Import CSB43 file::
     >>> csb43file = os.path.join(os.path.dirname(__file__), 'c43.txt')
     >>> with open(csb43file, 'r') as f:
     ...     csb43_data = f.read()
-    >>> f.closed
-    True
     >>> wcsb43 = Wizard('account.bank.statement.import_csb43', [statement])
     >>> wcsb43.form.import_file = bytearray(csb43_data)
     >>> wcsb43.form.confirm = True
