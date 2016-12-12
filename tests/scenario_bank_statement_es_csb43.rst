@@ -17,7 +17,6 @@ Imports::
     ...     create_chart, get_accounts, create_tax
     >>> today = datetime.date.today()
     >>> now = datetime.datetime.now()
-    >>> from io import BytesIO
 
 Activate account_bank_statement_es_csb43 module::
 
