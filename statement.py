@@ -96,10 +96,16 @@ class ImportCSB43(Wizard):
         description = []
         lines = []
         line = {}
+        start_date = records[0].start_date
+        if isinstance(start_date, datetime.datetime):
+            start_date = start_date.date()
+        end_date = records[0].end_date
+        if isinstance(end_date, datetime.datetime):
+            end_date = end_date.date()
 
         BankStatement.write([statement], {
-            'start_date': records[0].start_date,
-            'end_date': records[0].end_date,
+            'start_date': start_date,
+            'end_date': end_date,
             'start_balance': records[0].initial_balance,
             'end_balance': records[-1].final_balance,
             })
