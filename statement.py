@@ -30,7 +30,7 @@ class Statement:
 
     @classmethod
     @ModelView.button_action(
-        'account_bank_statement_es_csb43.act_import_csb43')
+        'account_bank_statement_es_csb43.wizard_import_csb43')
     def import_csb43(cls, statements):
         pass
 
