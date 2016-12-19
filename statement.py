@@ -82,7 +82,7 @@ class ImportCSB43(Wizard):
         statement = BankStatement(Transaction().context['active_id'])
         if statement.lines:
             self.raise_user_error('statement_already_has_lines')
-        data = unicode(str(self.start.import_file), 'latin1')
+        data = self.start.import_file.decode('utf-8')
         try:
             records = c43.read(data)
         except RetrofixException as e:
