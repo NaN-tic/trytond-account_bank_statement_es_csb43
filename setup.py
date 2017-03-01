@@ -47,7 +47,7 @@ download_url = ('https://bitbucket.org/trytonspain/'
     'trytond-account_bank_statement_es_csb43')
 
 requires = [
-    'retrofix >= 0.18',
+    'retrofix >= 0.21',
     ]
 for dep in info.get('depends', []):
     if not re.match(r'(ir|res)(\W|$)', dep):
