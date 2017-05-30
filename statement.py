@@ -9,7 +9,17 @@ from retrofix import c43
 from retrofix.exception import RetrofixException
 import datetime
 
-__all__ = ['Statement', 'ImportCSB43', 'ImportCSB43Start']
+__all__ = ['Configuration', 'Statement', 'ImportCSB43', 'ImportCSB43Start']
+
+
+class Configuration:
+    __metaclass__ = PoolMeta
+    __name__ = 'account.configuration'
+    csb43_date = fields.Property(fields.Selection([
+        ('operation_date', 'Operation Date'),
+        ('value_date', 'Value Date'),
+        ], 'CSB43 Date',
+        help='Set date line from CSB43 file'))
 
 
 class Statement:
@@ -142,8 +152,11 @@ class ImportCSB43(Wizard):
         return 'end'
 
     def get_line_vals_from_record(self, record, statement):
+        Config = Pool().get('account.configuration')
+        config = Config(1)
+
         return {
             'statement': statement.id,
-            'date': record.value_date,
+            'date': getattr(record, config.csb43_date or 'value_date'),
             'amount': record.amount,
             }
