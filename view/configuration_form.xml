@@ -3,7 +3,7 @@
 contains the full copyright notices and license terms. -->
 <data>
     <xpath expr="/form" position="inside">
-        <label name="csb43_date"/>
+        <separator id="csb43_date" string="CSB43" colspan="4"/>
         <field name="csb43_date"/>
     </xpath>
 </data>
