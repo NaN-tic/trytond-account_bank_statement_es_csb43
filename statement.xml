@@ -11,12 +11,6 @@
             <field name="name">configuration_form</field>
         </record>
 
-        <record model="ir.property" id="property_csb43_date">
-            <field name="field"
-                search="[('model.model', '=', 'account.configuration'), ('name', '=', 'csb43_date')]"/>
-            <field name="value">,operation_date</field>
-        </record>
-
         <!-- account.bank.statement -->
         <record model="ir.ui.view" id="account_bank_statement_form_view">
             <field name="model">account.bank.statement</field>

@@ -4,6 +4,8 @@ contains the full copyright notices and license terms. -->
 <data>
     <xpath expr="/form" position="inside">
         <separator id="csb43_date" string="CSB43" colspan="4"/>
+        <label name="csb43_date"/>
         <field name="csb43_date"/>
+        <newline/>
     </xpath>
 </data>

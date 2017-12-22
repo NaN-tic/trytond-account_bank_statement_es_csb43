@@ -11,17 +11,41 @@ from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateView, StateTransition, Button
 from trytond.pyson import Eval, Bool
 
-__all__ = ['Configuration', 'Statement', 'ImportCSB43', 'ImportCSB43Start']
+__all__ = ['Configuration', 'ConfigurationDefaultAccount', 'Statement',
+    'ImportCSB43', 'ImportCSB43Start']
+
+csb43_date =  fields.Selection([
+    ('operation_date', 'Operation Date'),
+    ('value_date', 'Value Date'),
+    ], 'CSB43 Date',
+    help='Set date line from CSB43 file')
 
 
 class Configuration:
     __metaclass__ = PoolMeta
     __name__ = 'account.configuration'
-    csb43_date = fields.Property(fields.Selection([
-        ('operation_date', 'Operation Date'),
-        ('value_date', 'Value Date'),
-        ], 'CSB43 Date',
-        help='Set date line from CSB43 file'))
+    csb43_date = fields.MultiValue(csb43_date)
+
+    @classmethod
+    def multivalue_model(cls, field):
+        pool = Pool()
+        if field == 'csb43_date':
+            return pool.get('account.configuration.default_account')
+        return super(Configuration, cls).multivalue_model(field)
+
+    @classmethod
+    def default_csb43_date(cls, **pattern):
+        return cls.multivalue_model('csb43_date').default_csb43_date()
+
+
+class ConfigurationDefaultAccount:
+    __metaclass__ = PoolMeta
+    __name__ = 'account.configuration.default_account'
+    csb43_date = csb43_date
+
+    @classmethod
+    def default_csb43_date(cls):
+        return 'operation_date'
 
 
 class Statement:

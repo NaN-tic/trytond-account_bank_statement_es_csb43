@@ -7,6 +7,7 @@ from . import statement
 def register():
     Pool.register(
         statement.Configuration,
+        statement.ConfigurationDefaultAccount,
         statement.Statement,
         statement.ImportCSB43Start,
         module='account_bank_statement_es_csb43', type_='model')
