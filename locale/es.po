@@ -40,6 +40,10 @@ msgctxt "field:account.configuration,csb43_date:"
 msgid "CSB43 Date"
 msgstr "Fecha CSB43"
 
+msgctxt "field:account.configuration.default_account,csb43_date:"
+msgid "CSB43 Date"
+msgstr "Fecha CSB43"
+
 msgctxt "help:account.bank.statement.import_csb43.start,attachment:"
 msgid "Attach CSV file after import."
 msgstr "Adjuntar el CSV en el extracto bancario después de importar."
@@ -49,6 +53,10 @@ msgid "Confirm Bank Statement after import."
 msgstr "Confirmar el extracto bancario después de importar."
 
 msgctxt "help:account.configuration,csb43_date:"
+msgid "Set date line from CSB43 file"
+msgstr "Fija el campo fecha en la línea a partir del fichero CSB43"
+
+msgctxt "help:account.configuration.default_account,csb43_date:"
 msgid "Set date line from CSB43 file"
 msgstr "Fija el campo fecha en la línea a partir del fichero CSB43"
 
@@ -68,6 +76,14 @@ msgctxt "selection:account.configuration,csb43_date:"
 msgid "Value Date"
 msgstr "Fecha valor"
 
+msgctxt "selection:account.configuration.default_account,csb43_date:"
+msgid "Operation Date"
+msgstr "Fecha operación"
+
+msgctxt "selection:account.configuration.default_account,csb43_date:"
+msgid "Value Date"
+msgstr "Fecha valor"
+
 msgctxt "view:account.bank.statement.import_csb43.start:"
 msgid "Import CSB43 File to Bank Statement"
 msgstr "Importar archivo CSB43 a los extractos bancarios"
@@ -75,6 +91,10 @@ msgstr "Importar archivo CSB43 a los extractos bancarios"
 msgctxt "view:account.bank.statement:"
 msgid "Import CSB43"
 msgstr "Importación CSB43"
+
+msgctxt "view:account.configuration:"
+msgid "CSB43"
+msgstr "CSB43"
 
 msgctxt "wizard_button:account.bank.statement.import_csb43,start,end:"
 msgid "Cancel"
