@@ -1,18 +1,13 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
-import datetime
-
+from datetime import datetime
 from retrofix import c43
 from retrofix.exception import RetrofixException
-
 from trytond.pool import Pool, PoolMeta
-from trytond.model import ModelView, fields
-from trytond.transaction import Transaction
-from trytond.wizard import Wizard, StateView, StateTransition, Button
-from trytond.pyson import Eval, Bool
+from trytond.model import fields
 
-__all__ = ['Configuration', 'ConfigurationDefaultAccount', 'Statement',
-    'ImportCSB43', 'ImportCSB43Start']
+__all__ = ['Configuration', 'ConfigurationDefaultAccount', 'Import',
+    'ImportStart']
 
 csb43_date =  fields.Selection([
     ('operation_date', 'Operation Date'),
@@ -48,93 +43,43 @@ class ConfigurationDefaultAccount:
         return 'operation_date'
 
 
-class Statement:
+class ImportStart:
+    __name__ = 'account.bank.statement.import.start'
     __metaclass__ = PoolMeta
-    __name__ = 'account.bank.statement'
 
     @classmethod
     def __setup__(cls):
-        super(Statement, cls).__setup__()
-        cls._buttons.update({
-                'import_csb43': {
-                    'invisible': Bool(Eval('lines', [])),
-                    'icon': 'tryton-executable',
-                    },
-                })
-
-    @classmethod
-    @ModelView.button_action(
-        'account_bank_statement_es_csb43.wizard_import_csb43')
-    def import_csb43(cls, statements):
-        pass
+        super(ImportStart, cls).__setup__()
+        cls.type.selection += [('csb43', 'CSB 43')]
 
 
-class ImportCSB43Start(ModelView):
-    'Import CSB43 start'
-    __name__ = 'account.bank.statement.import_csb43.start'
-    import_file = fields.Binary('Import File', required=True)
-    attachment = fields.Boolean('Attachment',
-        help='Attach CSV file after import.')
-    confirm = fields.Boolean('Confirm',
-        help='Confirm Bank Statement after import.')
+class Import:
+    __name__ = 'account.bank.statement.import'
+    __metaclass__ = PoolMeta
 
-    @classmethod
-    def default_attachment(cls):
-        return True
+    def process(self, statement):
+        super(Import, self).process(statement)
+        if self.start.type != 'csb43':
+            return
 
-    @classmethod
-    def default_confirm(cls):
-        return True
-
-
-class ImportCSB43(Wizard):
-    'Import CSB43 file'
-    __name__ = 'account.bank.statement.import_csb43'
-    start = StateView('account.bank.statement.import_csb43.start',
-        'account_bank_statement_es_csb43.import_csb43_start_view_form', [
-            Button('Cancel', 'end', 'tryton-cancel'),
-            Button('Import File', 'import_file', 'tryton-ok', default=True),
-            ])
-    import_file = StateTransition()
-
-    @classmethod
-    def __setup__(cls):
-        super(ImportCSB43, cls).__setup__()
-        cls._error_messages.update({
-                'statement_already_has_lines': (
-                    'You cannot import a CSB43 bank statement file in a bank '
-                    'statement with lines.'),
-                'format_error': (
-                    "The supplied file does not have the expected format.\n"
-                    "This is the technical error returned by parser:\n  %s"),
-                })
-
-    def transition_import_file(self):
         pool = Pool()
         BankStatement = pool.get('account.bank.statement')
         BankStatementLine = pool.get('account.bank.statement.line')
-        Attachment = pool.get('ir.attachment')
 
-        statement = BankStatement(Transaction().context['active_id'])
-        if statement.lines:
-            self.raise_user_error('statement_already_has_lines')
         data = self.start.import_file.decode('latin1')
         try:
             records = c43.read(data)
         except RetrofixException as e:
             self.raise_user_error('format_error', str(e))
 
-        has_attachment = self.start.attachment
-        has_confirm = self.start.confirm
-
         description = []
         lines = []
         line = {}
         start_date = records[0].start_date
-        if isinstance(start_date, datetime.datetime):
+        if isinstance(start_date, datetime):
             start_date = start_date.date()
         end_date = records[0].end_date
-        if isinstance(end_date, datetime.datetime):
+        if isinstance(end_date, datetime):
             end_date = end_date.date()
 
         BankStatement.write([statement], {
@@ -162,19 +107,6 @@ class ImportCSB43(Wizard):
             line['description'] = " ".join(description)
             lines.append(line.copy())
         BankStatementLine.create(lines)
-
-        if has_confirm:
-            BankStatement.confirm([statement])
-            BankStatement.search_reconcile([statement])
-
-        if has_attachment:
-            attach = Attachment(
-                name=datetime.datetime.now().strftime("%y/%m/%d %H:%M:%S"),
-                type='data',
-                data=self.start.import_file,
-                resource=str(statement))
-            attach.save()
-
         return 'end'
 
     def get_line_vals_from_record(self, record, statement):

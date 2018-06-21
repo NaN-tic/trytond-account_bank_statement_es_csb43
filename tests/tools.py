@@ -1,10 +1,10 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
 
-__all__ = ['read_csv_file']
+__all__ = ['read_file']
 
 
-def read_csv_file(filename):
+def read_file(filename):
     with open(filename) as f:
         data = f.read()
         # On python3 we must cast to bytes with valid encoding
