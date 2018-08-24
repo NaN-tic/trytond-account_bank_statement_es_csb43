@@ -16,8 +16,7 @@ csb43_date =  fields.Selection([
     help='Set date line from CSB43 file')
 
 
-class Configuration:
-    __metaclass__ = PoolMeta
+class Configuration(metaclass=PoolMeta):
     __name__ = 'account.configuration'
     csb43_date = fields.MultiValue(csb43_date)
 
@@ -33,8 +32,7 @@ class Configuration:
         return cls.multivalue_model('csb43_date').default_csb43_date()
 
 
-class ConfigurationDefaultAccount:
-    __metaclass__ = PoolMeta
+class ConfigurationDefaultAccount(metaclass=PoolMeta):
     __name__ = 'account.configuration.default_account'
     csb43_date = csb43_date
 
@@ -43,9 +41,8 @@ class ConfigurationDefaultAccount:
         return 'operation_date'
 
 
-class ImportStart:
+class ImportStart(metaclass=PoolMeta):
     __name__ = 'account.bank.statement.import.start'
-    __metaclass__ = PoolMeta
 
     @classmethod
     def __setup__(cls):
@@ -53,9 +50,8 @@ class ImportStart:
         cls.type.selection += [('csb43', 'CSB 43')]
 
 
-class Import:
+class Import(metaclass=PoolMeta):
     __name__ = 'account.bank.statement.import'
-    __metaclass__ = PoolMeta
 
     def process(self, statement):
         super(Import, self).process(statement)
