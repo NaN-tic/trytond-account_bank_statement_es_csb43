@@ -5,11 +5,14 @@ from retrofix import c43
 from retrofix.exception import RetrofixException
 from trytond.pool import Pool, PoolMeta
 from trytond.model import fields
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
+
 
 __all__ = ['Configuration', 'ConfigurationDefaultAccount', 'Import',
     'ImportStart']
 
-csb43_date =  fields.Selection([
+csb43_date = fields.Selection([
     ('operation_date', 'Operation Date'),
     ('value_date', 'Value Date'),
     ], 'CSB43 Date',
@@ -66,7 +69,8 @@ class Import(metaclass=PoolMeta):
         try:
             records = c43.read(data)
         except RetrofixException as e:
-            self.raise_user_error('format_error', str(e))
+            raise UserError(gettext('account_bank_statement.format_error',
+                error=str(e)))
 
         description = []
         lines = []
