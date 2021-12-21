@@ -65,7 +65,7 @@ class Import(metaclass=PoolMeta):
         BankStatement = pool.get('account.bank.statement')
         BankStatementLine = pool.get('account.bank.statement.line')
 
-        data = self.start.import_file.decode('latin1')
+        data = self.start.import_file.decode('latin1').replace('\r', '')
         try:
             records = c43.read(data)
         except RetrofixException as e:
