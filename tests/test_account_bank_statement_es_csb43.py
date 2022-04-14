@@ -6,9 +6,10 @@ import doctest
 import trytond.tests.test_tryton
 from trytond.tests.test_tryton import ModuleTestCase
 from trytond.tests.test_tryton import doctest_teardown, doctest_checker
+from trytond.modules.company.tests import CompanyTestMixin
 
 
-class AccountBankStatementESCSB43TestCase(ModuleTestCase):
+class AccountBankStatementESCSB43TestCase(CompanyTestMixin, ModuleTestCase):
     'Test Account Bank Statement ES CSB43 module'
     module = 'account_bank_statement_es_csb43'
 
