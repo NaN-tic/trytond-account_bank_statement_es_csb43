@@ -1,8 +1,3 @@
-# ========================================
-# Account Bank Statement ES CSB43 Scenario
-# ========================================
-
-# Imports
 from trytond.modules.account.tests.tools import create_fiscalyear, create_chart, get_accounts
 from trytond.modules.company.tests.tools import create_company, get_company
 from trytond.tests.tools import activate_modules
@@ -24,11 +19,10 @@ class Test(unittest.TestCase):
 
     def test(self):
 
-        today = datetime.date.today()
         now = datetime.datetime.now()
 
         # Activate account_bank_statement_es_csb43 module
-        config = activate_modules('account_bank_statement_es_csb43')
+        activate_modules('account_bank_statement_es_csb43')
 
         # Create company
         _ = create_company()
@@ -41,10 +35,6 @@ class Test(unittest.TestCase):
         # Create chart of accounts
         _ = create_chart(company)
         accounts = get_accounts(company)
-        receivable = accounts['receivable']
-        revenue = accounts['revenue']
-        expense = accounts['expense']
-        payable = accounts['payable']
         cash = accounts['cash']
         cash.bank_reconcile = True
         cash.save()
@@ -75,7 +65,6 @@ class Test(unittest.TestCase):
 
         # Create Bank Statement
         BankStatement = Model.get('account.bank.statement')
-        StatementLine = Model.get('account.bank.statement.line')
         statement = BankStatement(journal=statement_journal, date=now)
         statement.save()
         statement.reload()
@@ -88,6 +77,4 @@ class Test(unittest.TestCase):
         wizard.form.confirm = True
         wizard.execute('import_file')
         statement.reload()
-        self.assertEqual(len(statement.lines)
-        , 22
-        )
+        self.assertEqual(len(statement.lines), 22)
