@@ -96,8 +96,12 @@ class Import(metaclass=PoolMeta):
 
         for record in records[1:-1]:
             if record.record_code == '23':
-                description.append(record.concept_1)
-                description.append(record.concept_2)
+                if (not record.concept_1.endswith(' ')
+                        and not record.concept_2.startswith(' ')):
+                    description.append(record.concept_1 + record.concept_2)
+                else:
+                    description.append(record.concept_1)
+                    description.append(record.concept_2)
             elif record.record_code == '22':
                 if line:
                     description = [x.strip() for x in description if x != '']
