@@ -18,10 +18,6 @@ msgctxt "help:account.configuration.default_account,csb43_date:"
 msgid "Set date line from CSB43 file"
 msgstr "Estableix el camp data a la línia a partir del fitxer CSB43"
 
-msgctxt "model:ir.action,name:"
-msgid "Import CSB43"
-msgstr "Importació CSB43"
-
 msgctxt "selection:account.bank.statement.import.start,type:"
 msgid "CSB 43"
 msgstr "CSB 43"
