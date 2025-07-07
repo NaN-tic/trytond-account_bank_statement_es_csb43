@@ -81,11 +81,7 @@ class Import(metaclass=PoolMeta):
         lines = []
         line = {}
         start_date = records[0].start_date
-        if isinstance(start_date, datetime):
-            start_date = start_date.date()
         end_date = records[0].end_date
-        if isinstance(end_date, datetime):
-            end_date = end_date.date()
 
         BankStatement.write([statement], {
             'start_date': start_date,
