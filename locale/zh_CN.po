@@ -1,0 +1,52 @@
+#
+msgid ""
+msgstr ""
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "field:account.configuration,csb43_date:"
+msgid "CSB43 Date"
+msgstr "CSB43 日期"
+
+msgctxt "field:account.configuration.default_account,csb43_date:"
+msgid "CSB43 Date"
+msgstr "CSB43 日期"
+
+msgctxt "help:account.configuration,csb43_date:"
+msgid "Set date line from CSB43 file"
+msgstr "从 CSB43 文件设置明细日期"
+
+msgctxt "help:account.configuration.default_account,csb43_date:"
+msgid "Set date line from CSB43 file"
+msgstr "从 CSB43 文件设置明细日期"
+
+msgctxt "selection:account.bank.statement.import.start,type:"
+msgid "CSB 43"
+msgstr "CSB 43"
+
+msgctxt "selection:account.configuration,csb43_date:"
+msgid "Operation Date"
+msgstr "交易日期"
+
+msgctxt "selection:account.configuration,csb43_date:"
+msgid "Value Date"
+msgstr "起息日"
+
+msgctxt "selection:account.configuration.default_account,csb43_date:"
+msgid "Operation Date"
+msgstr "交易日期"
+
+msgctxt "selection:account.configuration.default_account,csb43_date:"
+msgid "Value Date"
+msgstr "起息日"
+
+msgctxt "view:account.bank.statement:"
+msgid "Import CSB43"
+msgstr "导入 CSB43"
+
+msgctxt "view:account.configuration:"
+msgid "CSB43"
+msgstr "CSB43"
